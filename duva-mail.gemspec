@@ -1,5 +1,5 @@
 Gem::Specification.new do |spec|
-  spec.name = "duva"
+  spec.name = "duva-mail"
   spec.version = "0.0.1"
   spec.summary = "Official Duva client library (name reserved, not released yet)"
   spec.description = "Official client library for Duva, a transactional email API hosted in Canada. This name is reserved: the library is not released yet."
@@ -12,6 +12,6 @@ Gem::Specification.new do |spec|
     "rubygems_mfa_required" => "true"
   }
   spec.required_ruby_version = ">= 3.3"
-  spec.files = ["lib/duva.rb", "README.md", "LICENSE"]
+  spec.files = ["lib/duva.rb", "lib/duva-mail.rb", "README.md", "LICENSE"]
   spec.require_paths = ["lib"]
 end
