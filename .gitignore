@@ -1,0 +1,5 @@
+/pkg/
+/vendor/
+.rspec_status
+/conformance/
+.DS_Store

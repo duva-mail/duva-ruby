@@ -1,0 +1,56 @@
+AllCops:
+  TargetRubyVersion: 3.3
+  NewCops: enable
+  SuggestExtensions: false
+  Exclude:
+    - "vendor/**/*"
+    - "conformance/**/*"
+
+Layout/LineLength:
+  Max: 130 # request-building lines with several keyword args read better on one line
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes # used consistently throughout regardless of interpolation
+
+Style/Documentation:
+  Enabled: false # comments above each method/class are the doc convention here, not class-level YARD blocks
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*" # RSpec's own idiom nests examples inside describe/it blocks
+
+Metrics/ClassLength:
+  Exclude:
+    - "lib/duva/client.rb" # one resource class per API area; splitting further would not help
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/ParameterLists:
+  Max: 12 # messages.deliver and message_body mirror the API's own field list
+
+# The methods flagged below (retry policy, webhook verification, request building, the
+# HTTP/attachment/pagination helpers) read as one clear sequence of guard clauses each; splitting
+# them into more sub-methods would add indirection without adding clarity.
+Metrics/AbcSize:
+  Max: 30
+
+Metrics/CyclomaticComplexity:
+  Max: 16
+
+Metrics/PerceivedComplexity:
+  Max: 16
+
+Naming/MethodParameterName:
+  AllowedNames:
+    - h # `from_json_hash(h)`: a plain JSON Hash, not worth a longer name at every call site
+    - to # `deliver(to:, ...)`: the API's own field name
+    - id # `get(id)`, `delete(id)`, `deliveries(id, ...)`: matches every resource method's shape
+
+Naming/FileName:
+  Exclude:
+    - "lib/duva-mail.rb" # required RubyGems convention: `require "duva-mail"` must find this exact name
+
+Lint/DataDefineOverride:
+  Exclude:
+    - "lib/duva/transport.rb" # RequestSpec's `:method` (HTTP verb) is meant to shadow Object#method here
